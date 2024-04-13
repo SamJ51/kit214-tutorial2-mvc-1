@@ -6,6 +6,7 @@ ini_set('display_startup_errors', 1);
 include_once("model/Model.php");  
 include_once("view/ViewCustomerList.php");
 include_once("view/ViewCustomerTable.php");
+include_once("view/ViewBackToHome.php");
   
 class Controller 
 {  
@@ -27,6 +28,9 @@ class Controller
           }
           else if ($action == self::ACTION_VIEW_ONE)
           {
+               $viewBack = new ViewBackToHome();
+               $viewBack->output();
+
                if ($search == null)
                {
                     echo "No search term entered";
