@@ -12,6 +12,13 @@ include_once("controller/Controller.php");
 $controller = new Controller();  
 
 //Run logic
-$controller->execute();  
+if (isset($_GET['customer']))
+{
+    $controller->execute(Controller::ACTION_VIEW_ONE, $_GET['customer']);
+}
+else
+{
+    $controller->execute(Controller::ACTION_VIEW_ALL);
+} 
 
 ?>

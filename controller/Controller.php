@@ -9,6 +9,9 @@ include_once("view/ViewCustomerTable.php");
   
 class Controller 
 {  
+     public const ACTION_VIEW_ALL = 1;
+     public const ACTION_VIEW_ONE = 2;
+
      public $model;   
 
      public function __construct()    
@@ -16,9 +19,22 @@ class Controller
           $this->model = new Model();  
      }   
       
-     public function execute()  
+     public function execute($action, $search = NULL)  
      {  
-		$customers = $this->model->getCustomerList();  
+          if ($action == self::ACTION_VIEW_ALL)
+          {
+		     $customers = $this->model->getCustomerList();  
+          }
+          else if ($action == self::ACTION_VIEW_ONE)
+          {
+               if ($search == null)
+               {
+                    echo "No search term entered";
+                    return;
+               }
+
+               $customers = $this->model->getCustomerByID($search);  
+          }
 
           $view = new ViewCustomerTable();
           //or

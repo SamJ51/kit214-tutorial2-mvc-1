@@ -21,7 +21,18 @@ class Model
 
     }        
   
-    // public function getCustomerByID($id)  {   }       
+    public function getCustomerByID($id)  
+    { 
+        global $mysqli;
+
+        $sql = "SELECT * FROM customer WHERE id = $id";
+
+        $result = $mysqli->query($sql);
+
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+
+        return [ new Customer($row['id'], $row['fname'],$row['lname'],$row['email']) ];
+    }       
     // public function getCustomerByName($name)  {   } 
 } 
 ?>
