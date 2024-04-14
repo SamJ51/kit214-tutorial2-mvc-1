@@ -9,6 +9,8 @@ include_once("view/ViewCustomerTable.php");
 
 // Added a new include for the new view
 include_once("view/ViewBackToHome.php");
+
+include_once("view/ViewSearchBox.php");
   
 class Controller 
 {  
@@ -31,6 +33,10 @@ class Controller
           // Used an if statement to check the action type
           if ($action == self::ACTION_VIEW_ALL)
           {
+               // For viewing all, we display a search box first
+               $viewBack = new ViewSearchBox();
+               $viewBack->output();
+
                // For viewing all, we just get the list of customers
 		     $customers = $this->model->getCustomerList();  
           }
