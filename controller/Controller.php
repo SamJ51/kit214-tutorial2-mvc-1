@@ -67,7 +67,7 @@ class Controller
                     return;
                }
 
-               $customers = $this->model->getCustomerBySearch($search);  
+               $customers = $this->model->getCustomerByName($search);  
           }
           else
           {
