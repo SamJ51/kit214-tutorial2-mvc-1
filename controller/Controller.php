@@ -18,6 +18,7 @@ class Controller
      // Could have used an enum here, but this is enough
      public const ACTION_VIEW_ALL = 1;
      public const ACTION_VIEW_ONE = 2;
+     public const ACTION_VIEW_SEARCH = 3;
 
      public $model;   
 
@@ -53,6 +54,25 @@ class Controller
                }
 
                $customers = $this->model->getCustomerByID($search);  
+          }
+          else if ($action == self::ACTION_VIEW_SEARCH)
+          {
+               // For searching, we display a back button and we get the customer by search term
+               $viewBack = new ViewBackToHome();
+               $viewBack->output();
+
+               if ($search == null)
+               {
+                    echo "No search term entered";
+                    return;
+               }
+
+               $customers = $this->model->getCustomerBySearch($search);  
+          }
+          else
+          {
+               echo "Invalid action";
+               return;
           }
 
           // For both action types, we can output the customers in a list or a table
