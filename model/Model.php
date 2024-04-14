@@ -33,6 +33,21 @@ class Model
 
         return [ new Customer($row['id'], $row['fname'],$row['lname'],$row['email']) ];
     }       
-    // public function getCustomerByName($name)  {   } 
+    
+    public function getCustomerByName($name)  
+    {
+        global $mysqli;
+
+        $sql = "SELECT * FROM customer WHERE fname LIKE '%$name%' OR lname LIKE '%$name%'";
+
+        $result = $mysqli->query($sql);
+
+        $arr = array();
+        while($row = $result->fetch_array(MYSQLI_ASSOC))
+        {
+            $arr[$row['id']] = new Customer($row['id'], $row['fname'],$row['lname'],$row['email']);
+        }
+        return $arr;
+    } 
 } 
 ?>
