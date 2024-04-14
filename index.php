@@ -16,6 +16,10 @@ if (isset($_GET['customer']))
 {
     $controller->execute(Controller::ACTION_VIEW_ONE, $_GET['customer']);
 }
+else if (isset($_GET['search']))
+{
+    $controller->execute(Controller::ACTION_VIEW_SEARCH, $_GET['search']);
+}
 else
 {
     $controller->execute(Controller::ACTION_VIEW_ALL);
