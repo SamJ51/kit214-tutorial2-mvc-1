@@ -1,9 +1,3 @@
-<html>
-<head><title> MVC Webpage </title></head>
-<body>
-
-<h1>Welcome to MVC (Customer Example)</h1>
-
 <?php
 // include controller  
 include_once("controller/Controller.php");  
@@ -12,6 +6,13 @@ include_once("controller/Controller.php");
 $controller = new Controller();  
 
 //Run logic
-$controller->execute();  
+if (isset($_GET['customer'])) {
+    $controller->execute(Controller::ACTION_VIEW_ONE, $_GET['customer']);
+} else if (isset($_GET['search'])) {
+    echo "Search term: " . htmlspecialchars($_GET['search']);
+    $controller->execute(Controller::ACTION_SEARCH, $_GET['search']);
+} else {
+    $controller->execute(Controller::ACTION_VIEW_ALL);
+}
 
 ?>
